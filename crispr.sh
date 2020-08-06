@@ -21,4 +21,4 @@ then
 fi
 
 echo "running CrispRVariants analysis including creation of plots"
-Rscript crisprvar.r $sample $infoFile
+Rscript crisprvar.r $sample $infoFile $genome $outDir
