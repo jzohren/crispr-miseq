@@ -7,16 +7,16 @@ library(GenomicFeatures)
 
 args <- commandArgs(trailingOnly = TRUE)
 sample <- args[1]
-out_dir <- args[2]
-info_file <- args[3]
-genome <- args[4]
+info_file <- read.table(args[2], sep = "\t")
+genome <- args[3]
+out_dir <- args[4]
 
 setwd(out_dir)
 colnames(info_file) <- c("sample", "gene", "seq", "chr", "start", "end", "strand", "plus", "minus")
 
 sample_name <- paste0(sample, "_", as.character(info_file$gene))
 
-bam <- paste0(out_dir, sample, ".bam")   
+bam <- paste0(out_dir, "/", sample, ".bam")   
 
 region <- GRanges(seqnames = info_file$chr, ranges = IRanges(info_file$start - info_file$minus, info_file$end + info_file$plus), strand = info_file$strand)
 
@@ -25,7 +25,7 @@ fasta <- read.fasta(paste0(sample_name, ".seq"), as.string = T)
 reference <- DNAString(unlist(fasta))
 system(sprintf("rm %s.seq", sample_name))
 
-if (row$strand == "-") {
+if (info_file$strand == "-") {
   reference <- reverseComplement(reference)
 }
 
