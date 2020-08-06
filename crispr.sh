@@ -11,7 +11,7 @@ genome=/Mus_musculus/UCSC/mm10/Sequence/BWAIndex/genome.fa
 fastqDir=/user/home/working_dir/fastq
 outDir=/user/home/working_dir/results
 
-if [ $MAP = true ]
+if [ $map = true ]
 then
 	echo "running read mapping"
 
