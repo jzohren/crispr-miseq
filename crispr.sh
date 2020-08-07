@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# example execution: ./crispr.sh A15 true info_file_example
+# example execution: ./crispr.sh A15 info_file_example
 
 # variable definitions
 
 sample=$1
-map=$2
-infoFile=$3
+infoFile=$2
+map=true
 genome=/Mus_musculus/UCSC/mm10/Sequence/BWAIndex/genome.fa
 
 # directory definitions
