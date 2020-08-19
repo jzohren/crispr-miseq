@@ -1,1 +1,2 @@
-A15	Sry	GCATTTATGGTGTGGTCCCG	chrY	2663609	2663628	-	20	20
+sample,gene,seq,chr,start,end,strand,plus,minus
+A15,Sry,GCATTTATGGTGTGGTCCCG,chrY,2663609,2663628,-,20,20
