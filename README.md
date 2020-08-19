@@ -7,4 +7,7 @@ In addition to the two read files in FASTA format, a comma-separted "info_file" 
 
 The directory where `genome.fa` is located also needs to contain the BWA index, as well as a FAI index.
 
-The pipeline can be iniitated by running `./crispr.sh <sample_name> <info_file>`. 
+The pipeline can be run using the following command: 
+```
+./crispr.sh <sample_name> <info_file.csv>
+```
