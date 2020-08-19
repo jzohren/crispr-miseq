@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# example execution: ./crispr.sh A15 info_file_example
+# example execution: ./crispr.sh A15 info_file.csv
 # where 'A15' is the sample name
 # and 'info_file_example' contains information about the guide sequence
 
