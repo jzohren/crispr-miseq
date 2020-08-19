@@ -9,16 +9,15 @@ library(glue)
 
 # variable definitions (provided to/from crispr.sh script)
 
-args 		<- commandArgs(trailingOnly = TRUE)
+args      <- commandArgs(trailingOnly = TRUE)
 sample 		<- args[1]
-info_file 	<- read.table(args[2], sep = "\t")
+info_file <- read.csv(args[2])
 genome 		<- args[3]
 out_dir 	<- args[4]
 
 setwd(out_dir)
-colnames(info_file) <- c("sample", "gene", "seq", "chr", "start", "end", "strand", "plus", "minus")
 gene 				<- as.character(info_file$gene)
-sample_name 		<- glue("{sample}_{gene}")
+sample_name <- glue("{sample}_{gene}")
 bam 				<- glue("{out_dir}/{sample}.bam")
 
 # create GRanges object of area around guide sequence
@@ -30,7 +29,7 @@ region <- GRanges(seqnames = info_file$chr, ranges = IRanges(info_file$start - i
 
 system(sprintf(glue("samtools faidx {genome} %s:%s-%s > %s.seq"), seqnames(region), start(region), end(region), sample_name))
 fasta 		<- read.fasta(glue("{sample_name}.seq"), as.string = T)
-reference 	<- DNAString(unlist(fasta))
+reference <- DNAString(unlist(fasta))
 system(sprintf("rm %s.seq", sample_name))
 
 if (info_file$strand == "-") {
