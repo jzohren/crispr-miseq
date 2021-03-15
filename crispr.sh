@@ -2,14 +2,14 @@
 
 # example execution: ./crispr.sh A15 info_file.csv
 # where 'A15' is the sample name
-# and 'info_file_example' contains information about the guide sequence
+# and 'info_file.csv' contains information about the guide sequence
 
 # variable definitions
 
 sample=$1
 infoFile=$2
 map=true
-genome=/Mus_musculus/UCSC/mm10/Sequence/BWAIndex/genome.fa
+genome=genome.fa
 
 # directory definitions
 
