@@ -15,6 +15,8 @@ info_file <- read.csv(args[2])
 genome    <- args[3]
 out_dir   <- args[4]
 
+colnames(info_file) <- tolower(colnames(info_file))
+
 setwd(out_dir)
 gene        <- as.character(info_file$gene)
 sample_name <- glue("{sample}_{gene}")
