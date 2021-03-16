@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# example execution: ./crispr.sh A15 info_file.csv true genome.fa fastqDir outDir
+# example execution: ./crispr.sh A15 info_file.csv true genome.fasta fastqDir outDir
 # where:
 # 'A15' is the sample name
 # 'info_file.csv' contains information about the guide sequence
 # 'true/false' indicates whether the mapping step should be executed
-# 'genome.fa' is the full path to the genome file (bwa and fai index files need to be in the same directory)
+# 'genome.fasta' is the full path to the genome file (bwa and fai index files need to be in the same directory)
 # 'fastqDir' is the directory with the fastq files
 # 'outDir' is the directory for the results
 
