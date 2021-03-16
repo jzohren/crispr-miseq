@@ -13,7 +13,7 @@ This pipeline utilises BWA (http://bio-bwa.sourceforge.net/) to map short paired
 
 ## info_file
 
-All sample information needs to be provided in a comma-separted `info_file.csv`. It has to include the sample name, gene name, guide sequence including PAM, chromosome location of the guide sequence, start position of the guide sequence, end position of the guide sequence, strand of the guide sequence, and how many base pairs up- and downstream of the guide sequence should be analysed. An example of such a file is in `info_file.csv`. 
+All sample information needs to be provided in a comma-separted `info_file.csv`. It has to include the sample name, gene name, guide sequence excluding PAM, chromosome location of the guide sequence, start position of the guide sequence, end position of the guide sequence, strand of the guide sequence, and how many base pairs up- and downstream of the guide sequence should be analysed. An example of such a file is in `info_file.csv`. 
 
 The directory where `genome.fasta` is located also needs to contain the BWA index, as well as a FAI index.
 It is crucial that the chromosome names in the `info_file.csv` match those in `genome.fasta` (e.g. _chrY_ and _>chrY_, rather than _Y_ and _>chrY_ or vice-versa). 
