@@ -1,20 +1,25 @@
 #!/bin/bash
 
-# example execution: ./crispr.sh A15 info_file.csv
+# example execution: ./crispr.sh A15 info_file.csv true
 # where 'A15' is the sample name
 # and 'info_file.csv' contains information about the guide sequence
+# and 'true/false' indicates whether the mapping step should be executed
 
-# variable definitions
+# variable definitions from command line parameters
 
 sample=$1
 infoFile=$2
-map=true
-genome=genome.fa
+map=$3
 
-# directory definitions
+# user-defined variable definitions
 
-fastqDir=/user/home/working_dir/fastq
-outDir=/user/home/working_dir/results
+# provide full path to genome file
+# bwa and fai index files need to be in the same directory
+genome=<path to genome.fa>
+# provide full path to directory with fastq files
+fastqDir=<path to fastq files>
+# provide an output directory for the results
+outDir=<path to output directory>
 
 # only run mapping stage if variable set to true
 # explanation: usually, the read mapping only has to be done once
