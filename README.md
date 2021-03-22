@@ -27,16 +27,16 @@ The pipeline can be run using the following command:
 
 ## Parameter definitions
 ```
-**-s** 
+-s
 is the sample name
-**-i** 
+-i
 contains information about the guide sequence (see above)
-**-m** 
+-m 
 indicates whether the mapping step should be executed
-**-g** 
+-g 
 is the full path to the genome file (bwa and fai index files need to be in the same directory)
-**-f** 
+-f 
 is the directory with the fastq files
-**-o** 
+-o 
 is the directory for the results
 ```
