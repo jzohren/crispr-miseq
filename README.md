@@ -26,6 +26,7 @@ The pipeline can be run using the following command:
 ```
 
 ## Parameter definitions
+```
 **-s** 
 is the sample name
 **-i** 
@@ -38,3 +39,4 @@ is the full path to the genome file (bwa and fai index files need to be in the s
 is the directory with the fastq files
 **-o** 
 is the directory for the results
+```
