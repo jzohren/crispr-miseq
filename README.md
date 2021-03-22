@@ -22,13 +22,13 @@ It is crucial that the chromosome names in the `info_file.csv` match those in `g
 
 The pipeline can be run using the following command: 
 ```
-./crispr.sh sample_name info_file.csv true/false genome.fasta fastqDir outDir
+./crispr.sh -s sample_name -i info_file.csv -m true/false -g genome.fasta -f fastqDir -o outDir
 ```
 
 ## Parameter definitions
-* **sample_name** is the sample name
-* **info_file.csv** contains information about the guide sequence (see above)
-* **true/false** indicates whether the mapping step should be executed
-* **genome.fa** is the full path to the genome file (bwa and fai index files need to be in the same directory)
-* **fastqDir** is the directory with the fastq files
-* **outDir** is the directory for the results
+* **-s** is the sample name
+* **-i** contains information about the guide sequence (see above)
+* **-m** indicates whether the mapping step should be executed
+* **-g** is the full path to the genome file (bwa and fai index files need to be in the same directory)
+* **-f** is the directory with the fastq files
+* **-o** is the directory for the results
