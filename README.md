@@ -3,7 +3,7 @@ Analysis of MiSeq amplicon data from CRISPR experiments.
 
 ## Prerequisites 
 
-This pipeline utilises [BWA](http://bio-bwa.sourceforge.net/) to map short paired-end amplicon data to a genome sequence. After postprocessing with [samtools](http://samtools.sourceforge.net/), the data is further analysed using the [CrispRVariants](https://bioconductor.org/packages/release/bioc/html/CrispRVariants.html) R package . In addition to CrispRVariants, the following R packages need to be installed:
+This pipeline utilises [BWA](http://bio-bwa.sourceforge.net/) to map short paired-end amplicon data to a genome sequence. After postprocessing with [samtools](http://samtools.sourceforge.net/), the data is further analysed using the [CrispRVariants](https://bioconductor.org/packages/release/bioc/html/CrispRVariants.html) R package. In addition to CrispRVariants, the following R packages need to be installed:
 
 * rtracklayer
 * Biostrings
@@ -22,14 +22,14 @@ It is crucial that the chromosome names in the `info_file.csv` match those in `g
 
 The pipeline can be run using the following command: 
 ```sh
-./crispr.sh -s sample_name -i info_file.csv -m true/false -g genome.fasta -f fastqDir -o outDir
+./crispr.sh -s sample_name -i info_file.csv -m -g genome.fasta -f fastqDir -o outDir
 ```
 
 ## Parameter definitions
 ```
 -s	is the sample name
 -i	contains information about the guide sequence (see above)
--m	indicates whether the mapping step should be executed
+-m	is a flag indicating whether the mapping step should be executed (omit if you don't want to map)
 -g	is the full path to the genome file (bwa and fai index files need to be in the same directory)
 -f	is the directory with the fastq files
 -o	is the directory for the results

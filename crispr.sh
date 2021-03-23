@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# example execution: ./crispr.sh -s A15 -i info_file.csv -m true -g genome.fasta -f fastqDir -o outDir
+# example execution: ./crispr.sh -s A15 -i info_file.csv -m -g genome.fasta -f fastqDir -o outDir
 # where:
 # -s is the sample name
 # -i contains information about the guide sequence
-# -m indicates whether the mapping step should be executed
+# -m indicates whether the mapping step should be executed (omit if you don't want to map)
 # -g is the full path to the genome file (bwa and fai index files need to be in the same directory)
 # -f is the directory with the fastq files
 # -o is the directory for the results
@@ -12,13 +12,16 @@
 
 # variable definitions from command line parameters
 
-while getopts ":s:i:m:g:f:o:" opt; do
+# default for mapping option unless -m flag is set
+map=false
+
+while getopts ":s:i:mg:f:o:" opt; do
 	case $opt in
 		s) sample="$OPTARG"
 		;;
 		i) infoFile="$OPTARG"
 		;;
-		m) map="$OPTARG"
+		m) map=true
 		;;
 		g) genome="$OPTARG"
 		;;
