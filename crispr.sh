@@ -1,23 +1,39 @@
 #!/bin/bash
 
-# example execution: ./crispr.sh A15 info_file.csv true genome.fasta fastqDir outDir
+# example execution: ./crispr.sh -s A15 -i info_file.csv -m -g genome.fasta -f fastqDir -o outDir
 # where:
-# 'A15' is the sample name
-# 'info_file.csv' contains information about the guide sequence
-# 'true/false' indicates whether the mapping step should be executed
-# 'genome.fasta' is the full path to the genome file (bwa and fai index files need to be in the same directory)
-# 'fastqDir' is the directory with the fastq files
-# 'outDir' is the directory for the results
+# -s is the sample name
+# -i contains information about the guide sequence
+# -m indicates whether the mapping step should be executed (omit if you don't want to map)
+# -g is the full path to the genome file (bwa and fai index files need to be in the same directory)
+# -f is the directory with the fastq files
+# -o is the directory for the results
 
 
 # variable definitions from command line parameters
 
-sample=$1
-infoFile=$2
-map=$3
-genome=$4
-fastqDir=$5
-outDir=$6
+# default for mapping option unless -m flag is set
+map=false
+
+while getopts ":s:i:mg:f:o:" opt; do
+	case $opt in
+		s) sample="$OPTARG"
+		;;
+		i) infoFile="$OPTARG"
+		;;
+		m) map=true
+		;;
+		g) genome="$OPTARG"
+		;;
+		f) fastqDir="$OPTARG"
+		;;
+		o) outDir="$OPTARG"
+		;;
+		\?) echo "Invalid option -$OPTARG" >&2
+		;;
+		:) echo "Option -$OPTARG requires an argument." >&2
+	esac
+done
 
 # only run mapping stage if 'map' variable is set to true
 # explanation: usually, the read mapping only has to be done once
