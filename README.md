@@ -3,7 +3,7 @@ Analysis of MiSeq amplicon data from CRISPR experiments.
 
 ## Prerequisites 
 
-This pipeline utilises BWA (http://bio-bwa.sourceforge.net/) to map short paired-end amplicon data to a genome sequence. After postprocessing with samtools (http://samtools.sourceforge.net/), the data is further analysed using the CrispRVariants R package (https://bioconductor.org/packages/release/bioc/html/CrispRVariants.html). In addition to CrispRVariants, the following R packages need to be installed:
+This pipeline utilises [BWA](http://bio-bwa.sourceforge.net/) to map short paired-end amplicon data to a genome sequence. After postprocessing with [samtools](http://samtools.sourceforge.net/), the data is further analysed using the [CrispRVariants](https://bioconductor.org/packages/release/bioc/html/CrispRVariants.html) R package . In addition to CrispRVariants, the following R packages need to be installed:
 
 * rtracklayer
 * Biostrings
