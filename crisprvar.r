@@ -5,7 +5,6 @@ library(rtracklayer)
 library(Biostrings)
 library(seqinr)
 library(GenomicFeatures)
-library(glue)
 
 # variable definitions (provided to/from crispr.sh script)
 
@@ -19,8 +18,8 @@ colnames(info_file) <- tolower(colnames(info_file))
 
 setwd(out_dir)
 gene        <- as.character(info_file$gene)
-sample_name <- glue("{sample}_{gene}")
-bam         <- glue("{out_dir}/{sample}.bam")
+sample_name <- paste0(sample, "_", gene)
+bam         <- paste0(out_dir, "/", sample, ".bam")
 
 # create GRanges object of area around guide sequence
 
@@ -29,8 +28,8 @@ region <- GRanges(seqnames = info_file$chr, ranges = IRanges(info_file$start - i
 # the following steps are processed outside R, in your unix environment
 # the 'region' object is used to extract a short FASTA sequence from the genome file
 
-system(sprintf(glue("samtools faidx {genome} %s:%s-%s > %s.seq"), seqnames(region), start(region), end(region), sample_name))
-fasta     <- read.fasta(glue("{sample_name}.seq"), as.string = T)
+system(sprintf(paste0("samtools faidx ", genome, " %s:%s-%s > %s.seq"), seqnames(region), start(region), end(region), sample_name))
+fasta     <- read.fasta(paste0(sample_name, ".seq"), as.string = T)
 reference <- DNAString(unlist(fasta))
 system(sprintf("rm %s.seq", sample_name))
 
@@ -47,15 +46,15 @@ eff_raw    <- mutationEfficiency(crispr_set)
 
 # information about mutation efficancy and allele frequencies are written to simple text files
 
-write("mutation efficiency:", file = glue("{sample_name}_mutEffic.txt"))
-write(rbind(names(eff_raw), eff_raw), file = glue("{sample_name}_mutEffic.txt"), append = T)
+write("mutation efficiency:", file = paste0(sample_name, "_mutEffic.txt"))
+write(rbind(names(eff_raw), eff_raw), file = paste0(sample_name, "_mutEffic.txt"), append = T)
 
 allele_freqs <- barplotAlleleFreqs(var_counts, include.table = F)
-write.table(allele_freqs$data, file = glue("{sample_name}_allele_freqs.txt"), sep = "\t", quote = F, row.names = F)
+write.table(allele_freqs$data, file = paste0(sample_name, "_allele_freqs.txt"), sep = "\t", quote = F, row.names = F)
 
 # plots are saved in a PDF file
 
-pdf(file = glue("{sample_name}.pdf"), width = 25, height = 30)
+pdf(file = paste0(sample_name, ".pdf"), width = 25, height = 30)
   plotVariants(crispr_set, plotAlignments.args = list(tile.height = 1, ins.size = 3, legend.cols = 5))
   barplotAlleleFreqs(var_counts, include.table = F)
   plotAlignments(crispr_set, top.n = nrow(crispr_set$cigar_freqs), add.other = F, ins.size = 3, legend.cols = 13, tile.height = 1)
@@ -63,7 +62,7 @@ dev.off()
 
 # a list of all possible variants is written to a text file
 
-write.table(var_counts, file = glue("{sample_name}_variants.txt"), sep = "\t", quote = F)
+write.table(var_counts, file = paste0(sample_name, "_variants.txt"), sep = "\t", quote = F)
 
 # the variants occurring most frequently are plotted in a pie chart
 # both with and without the "no variant" category
@@ -73,10 +72,10 @@ top_mutations   <- var_counts[selection]
 mut_percentages <- round(100 * (var_counts / sum(var_counts)), 2)
 
 pie_labels <- rownames(var_counts)[selection]
-pie_labels <- glue("{mut_percentages[selection]} % {pie_labels}")
+pie_labels <- paste0(mut_percentages[selection], " % ", pie_labels")
 pie_colors <- sample(colors(), length(top_mutations))
 
-pdf(file = glue("{sample_name}_pie.pdf"), width = 9.5, height = 7)
+pdf(file = paste0(sample_name, "_pie.pdf"), width = 9.5, height = 7)
  pie(top_mutations, labels = NA, col = pie_colors, radius = 0.9, main = sample_name)
  legend("right", pie_labels, col = pie_colors, pch = 15)
  pie(top_mutations[-1], labels = NA, col = pie_colors, radius = 0.9)
