@@ -56,7 +56,7 @@ ref_2=$prefix$split_by$suffix
 if [[ ! -f "$ref_2" ]]; 
 then
 	echo "ERROR: wrong ref provided"
-	echo "e.g.: /camp/svc/reference/Genomics/aws-igenomes/Mus_musculus/UCSC/mm10/Sequence/BWAIndex/genome.fa"
+	echo "e.g.: /camp/svc/reference/Genomics/aws-igenomes/Mus_musculus/UCSC/mm10/Sequence/WholeGenomeFasta/genome.fa"
 	exit 1;
 fi
 
