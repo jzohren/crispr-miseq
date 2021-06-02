@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# example execution: ./crispr.sh -s A15 -i info_file.csv -m -s species -f fastqDir -o outDir
+# example execution: ./crispr.sh -n A15 -i info_file.csv -m -s species -f fastqDir -o outDir
 # where:
-# -s is the sample name [string]
+# -n is the sample name [string]
 # -i contains information about the guide sequence [string]
 # -m indicates whether the mapping step should be executed (omit if you don't want to map) [boolean]
 # -s is the name of the species being analysed [mouse/human]
@@ -15,9 +15,9 @@
 # default for mapping option unless -m flag is set
 map=false
 
-while getopts ":s:i:mg:f:o:" opt; do
+while getopts ":n:i:ms:f:o:" opt; do
 	case $opt in
-		s) sample="$OPTARG"
+		n) sample="$OPTARG"
 		;;
 		i) infoFile="$OPTARG"
 		;;
