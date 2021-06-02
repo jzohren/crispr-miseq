@@ -9,7 +9,6 @@ This pipeline utilises [BWA](http://bio-bwa.sourceforge.net/) to map short paire
 * Biostrings
 * seqinr
 * GenomicFeatures
-* glue
 
 ## info_file
 
