@@ -23,7 +23,7 @@ while getopts ":n:i:ms:f:o:" opt; do
 		;;
 		m) map=true
 		;;
-		s) species="$OPTARG"
+		s) species_tmp="$OPTARG"
 		;;
 		f) fastqDir="$OPTARG"
 		;;
@@ -34,6 +34,8 @@ while getopts ":n:i:ms:f:o:" opt; do
 		:) echo "Option -$OPTARG requires an argument." >&2
 	esac
 done
+
+species=`echo $species_tmp | tr '[:upper:]' '[:lower:]'`
 
 if [ $species = mouse ]
 then
