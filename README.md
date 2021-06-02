@@ -29,7 +29,7 @@ The pipeline can be run using the following command:
 -s	is the sample name [string]
 -i	contains information about the guide sequence (see above) [string]
 -m	is a flag indicating whether the mapping step should be executed (omit if you don't want to map)  [boolean]
--s is the name of the species being analysed [mouse/human]
+-s  is the name of the species being analysed [mouse/human]
 -f	is the directory with the fastq files [string]
 -o	is the directory for the results [string]
 ```
