@@ -21,15 +21,15 @@ It is crucial that the chromosome names in the `info_file.csv` match those in `g
 
 The pipeline can be run using the following command: 
 ```sh
-./crispr.sh -s sample_name -i info_file.csv -m -g genome.fasta -f fastqDir -o outDir
+./crispr.sh -s sample_name -i info_file.csv -m -s species -f fastqDir -o outDir
 ```
 
 ## Parameter definitions
 ```
--s	is the sample name
--i	contains information about the guide sequence (see above)
--m	is a flag indicating whether the mapping step should be executed (omit if you don't want to map)
--g	is the full path to the genome file (bwa and fai index files need to be in the same directory)
--f	is the directory with the fastq files
--o	is the directory for the results
+-s	is the sample name [string]
+-i	contains information about the guide sequence (see above) [string]
+-m	is a flag indicating whether the mapping step should be executed (omit if you don't want to map)  [boolean]
+-s is the name of the species being analysed [mouse/human]
+-f	is the directory with the fastq files [string]
+-o	is the directory for the results [string]
 ```
