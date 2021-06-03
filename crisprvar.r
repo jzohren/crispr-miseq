@@ -16,14 +16,17 @@ out_dir   <- args[4]
 
 colnames(info_file) <- tolower(colnames(info_file))
 
+idx <- grepl(sample, info_file$sample)
+row <- info_file[idx, ]
+
 setwd(out_dir)
-gene        <- as.character(info_file$gene)
+gene        <- as.character(row$gene)
 sample_name <- paste0(sample, "_", gene)
 bam         <- paste0(out_dir, "/", sample, ".bam")
 
 # create GRanges object of area around guide sequence
 
-region <- GRanges(seqnames = info_file$chr, ranges = IRanges(info_file$start - info_file$minus, info_file$end + info_file$plus), strand = info_file$strand)
+region <- GRanges(seqnames = row$chr, ranges = IRanges(row$start - row$minus, row$end + row$plus), strand = row$strand)
 
 # the following steps are processed outside R, in your unix environment
 # the 'region' object is used to extract a short FASTA sequence from the genome file
@@ -33,13 +36,13 @@ fasta     <- read.fasta(paste0(sample_name, ".seq"), as.string = T)
 reference <- DNAString(unlist(fasta))
 system(sprintf("rm %s.seq", sample_name))
 
-if (info_file$strand == "-") {
+if (row$strand == "-") {
   reference <- reverseComplement(reference)
 }
 
 # the main CrispRVariants object is being created
 
-crispr_set <- readsToTarget(bam, region, reference = reference, target.loc = 17 + info_file$minus, collapse.pairs = T, chimera.to.target = 200, names = sample_name)
+crispr_set <- readsToTarget(bam, region, reference = reference, target.loc = 17 + row$minus, collapse.pairs = T, chimera.to.target = 200, names = sample_name)
 
 var_counts <- variantCounts(crispr_set)
 eff_raw    <- mutationEfficiency(crispr_set)
@@ -72,7 +75,7 @@ top_mutations   <- var_counts[selection]
 mut_percentages <- round(100 * (var_counts / sum(var_counts)), 2)
 
 pie_labels <- rownames(var_counts)[selection]
-pie_labels <- paste0(mut_percentages[selection], " % ", pie_labels")
+pie_labels <- paste0(mut_percentages[selection], " % ", pie_labels)
 pie_colors <- sample(colors(), length(top_mutations))
 
 pdf(file = paste0(sample_name, "_pie.pdf"), width = 9.5, height = 7)

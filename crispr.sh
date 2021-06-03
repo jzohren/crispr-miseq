@@ -37,10 +37,10 @@ done
 
 species=`echo $species_tmp | tr '[:upper:]' '[:lower:]'`
 
-if [ $species = mouse ]
+if [ "$species" == "mouse" ]
 then
 	ref_1='/camp/svc/reference/Genomics/aws-igenomes/Mus_musculus/UCSC/mm10/Sequence/BWAIndex/genome.fa'
-elif [ $species = human ]
+elif [ "$species" == "human" ]
 then
 	ref_1='/camp/svc/reference/Genomics/aws-igenomes/Homo_sapiens/UCSC/hg38/Sequence/BWAIndex/genome.fa'
 else
@@ -70,7 +70,7 @@ then
 	echo "running read mapping with bwa and samtools sort-index"
 	
 	# map reads with bwa and postprocess output with samtools
-	bwa mem -t 4 $ref_1 $fastqDir/${sample}_R1.fastq.gz $fastqDir/${sample}_R2.fastq.gz | samtools view -b - | samtools sort - -o $outDir/${sample}.bam
+	bwa mem -t 4 $ref_1 $fastqDir/${sample}_R1_001.fastq.gz $fastqDir/${sample}_R2_001.fastq.gz | samtools view -b - | samtools sort - -o $outDir/${sample}.bam
 	samtools index $outDir/${sample}.bam
 fi
 
