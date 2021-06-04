@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# example execution: ./crispr.sh -n A15 -i info_file.csv -m -s species -f fastqDir -o outDir
+# example execution: ./crispr.sh -n A15 -i info_file.csv -s species -f fastqDir -o outDir -m
 # where:
 # -n is the sample name [string]
 # -i contains information about the guide sequence [string]
-# -m indicates whether the mapping step should be executed (omit if you don't want to map) [boolean]
 # -s is the name of the species being analysed [mouse/human]
 # -f is the directory with the fastq files [string]
 # -o is the directory for the results [string]
+# -m indicates whether the mapping step should be executed (omit if you don't want to map) [boolean]
 
 
 # variable definitions from command line parameters
