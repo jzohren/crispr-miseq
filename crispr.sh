@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# example execution: ./crispr.sh -n A15 -i info_file.csv -s species -f fastqDir -o outDir -m
+# example execution: ./crispr.sh -n NIC283A6210_S4_L001 -i info_file.csv -s mouse -f fastqDir -o outDir -m
 # where:
 # -n is the sample name [string]
 # -i contains information about the guide sequence [string]
