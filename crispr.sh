@@ -74,7 +74,7 @@ then
 	ml
 
 	# map reads with bwa and postprocess output with samtools
-	bwa mem -t 4 $ref_1 $fastqDir/${sample}_R1_001.fastq.gz $fastqDir/${sample}_R2_001.fastq.gz | samtools view -b - | samtools sort - -o $outDir/${sample}.bam
+	bwa mem -t 4 $ref_1 $fastqDir/${sample}_R1_001.fastq.gz $fastqDir/${sample}_R2_001.fastq.gz | samtools view -bh - | samtools sort - -o $outDir/${sample}.bam
 	samtools index $outDir/${sample}.bam
 fi
 
