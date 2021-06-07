@@ -22,7 +22,7 @@ row <- info_file[idx, ]
 setwd(out_dir)
 gene        <- as.character(row$gene)
 sample_name <- paste0(sample, "_", gene)
-bam         <- paste0(out_dir, "/", sample, ".bam")
+bam         <- paste0(sample, ".bam")
 
 # create GRanges object of area around guide sequence
 
@@ -81,6 +81,8 @@ pie_colors <- sample(colors(), length(top_mutations))
 pdf(file = paste0(sample_name, "_pie.pdf"), width = 9.5, height = 7)
  pie(top_mutations, labels = NA, col = pie_colors, radius = 0.9, main = sample_name)
  legend("right", pie_labels, col = pie_colors, pch = 15)
- pie(top_mutations[-1], labels = NA, col = pie_colors, radius = 0.9)
- legend("right", pie_labels[-1], col = pie_colors, pch = 15)
+ if(length(selection) > 1) {
+  pie(top_mutations[-1], labels = NA, col = pie_colors, radius = 0.9)
+  legend("right", pie_labels[-1], col = pie_colors, pch = 15)
+ }
 dev.off()
