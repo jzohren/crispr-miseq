@@ -1,10 +1,10 @@
 # library loads
 
-library(CrispRVariants)
-library(rtracklayer)
-library(Biostrings)
-library(seqinr)
-library(GenomicFeatures)
+library(CrispRVariants, quietly = TRUE)
+library(rtracklayer, quietly = TRUE)
+library(Biostrings, quietly = TRUE)
+library(seqinr, quietly = TRUE)
+library(GenomicFeatures, quietly = TRUE)
 
 # variable definitions (provided to/from crispr.sh script)
 
@@ -86,3 +86,5 @@ pdf(file = paste0(sample_name, "_pie.pdf"), width = 9.5, height = 7)
   legend("right", pie_labels[-1], col = pie_colors, pch = 15)
  }
 dev.off()
+
+sessionInfo()
