@@ -35,6 +35,8 @@ while getopts ":n:i:ms:f:o:" opt; do
 	esac
 done
 
+mkdir -p $outDir
+
 species=`echo $species_tmp | tr '[:upper:]' '[:lower:]'`
 
 if [ "$species" == "mouse" ]
@@ -68,7 +70,9 @@ fi
 if [ $map = true ]
 then
 	echo "running read mapping with bwa and samtools sort-index"
-	
+	ml BWA SAMtools
+	ml
+
 	# map reads with bwa and postprocess output with samtools
 	bwa mem -t 4 $ref_1 $fastqDir/${sample}_R1_001.fastq.gz $fastqDir/${sample}_R2_001.fastq.gz | samtools view -b - | samtools sort - -o $outDir/${sample}.bam
 	samtools index $outDir/${sample}.bam
@@ -76,6 +80,8 @@ fi
 
 # continue analysis in R
 # relevant parameters are provided to the R script 
+ml R
+ml
 
 echo "running CrispRVariants analysis including creation of plots"
 Rscript crisprvar.r $sample $infoFile $ref_2 $outDir
